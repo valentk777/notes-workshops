@@ -762,3 +762,4 @@ file: DemoFiles/.gitlab-ci.yml
 
 @import "DemoFiles/.gitlab-ci.yml"
 
+https://github.com/valentk777/notes-workshops/blob/cf9fcf358246cc89e5666675a3da4800c100a5d8/GitLab%20CI_CD%20-%20workshop/DemoFiles/.gitlab-ci.yml#L1-L136
