@@ -1,8 +1,9 @@
 # Workshop – Kubernetes
-### Duration: 3 days
-### Level: Medium
-### Language: Lithuanian + English
-### Speaker: Valentinas Kaminskas
+* Duration: 3 days
+* Level: Medium
+* Language: Lithuanian + English
+* Speaker: [Valentinas Kaminskas](https://github.com/valentk777)
+
 
 
 # Day 1

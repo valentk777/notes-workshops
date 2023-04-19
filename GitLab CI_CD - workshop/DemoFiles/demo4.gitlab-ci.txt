@@ -1,0 +1,20 @@
+# Include
+
+include:
+  - local: 'my_build.yaml'
+  - local: 'my_push.yaml'
+
+
+stages:
+  - stage1
+  - stage2
+
+
+default:
+  image: alpine
+  tags:
+    - Your-Runner
+  before_script:
+    - echo "this is before script"
+  after_script:
+    - echo "this is after script"

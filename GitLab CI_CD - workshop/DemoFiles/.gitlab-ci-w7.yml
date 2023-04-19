@@ -1,0 +1,61 @@
+# Start from there
+
+default:
+  image: alpine
+  tags:
+    - Your-Runner
+  before_script:
+    - echo "this is before script"
+  after_script:
+    - echo "this is after script"
+
+
+stages:
+  - stage1
+  - stage2
+
+
+job-1-stage1:
+  stage: stage1
+  variables:
+    JOB_ENV_VARIABLE: "job local variable"
+  script:
+    - echo "Hello, $GITLAB_USER_LOGIN. You use $JOB_ENV_VARIABLE variable"
+  allow_failure: true
+
+
+job-2-stage1:
+  stage: stage1
+  variables:
+    JOB_ENV_VARIABLE: "job local variable"
+  script:
+    - echo "Hello, $GITLAB_USER_LOGIN. You use $JOB_ENV_VARIABLE variable"
+  allow_failure: true
+
+
+job-1-stage2-ci:
+  stage: stage2
+  variables:
+    JOB_ENV_VARIABLE: "job local variable"
+  script:
+    - echo "Hello, $GITLAB_USER_LOGIN. You use $JOB_ENV_VARIABLE variable"
+    - echo "print $TEST_ENV"
+  allow_failure: true
+
+job-1-stage2-uat:
+  stage: stage2
+  variables:
+    JOB_ENV_VARIABLE: "job local variable"
+  script:
+    - echo "Hello, $GITLAB_USER_LOGIN. You use $JOB_ENV_VARIABLE variable"
+    - echo "print $TEST_ENV"
+  allow_failure: true
+
+job-1-stage2-production:
+  stage: stage2
+  variables:
+    JOB_ENV_VARIABLE: "job local variable"
+  script:
+    - echo "Hello, $GITLAB_USER_LOGIN. You use $JOB_ENV_VARIABLE variable"
+    - echo "print $TEST_ENV"
+  allow_failure: true

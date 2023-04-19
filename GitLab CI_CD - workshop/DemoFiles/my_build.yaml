@@ -1,0 +1,27 @@
+.stage1-shared:
+  stage: stage1
+  variables:
+    JOB_ENV_VARIABLE: "job local variable"
+  script:
+    - echo "Hello, $GITLAB_USER_LOGIN. You use $JOB_ENV_VARIABLE variable"
+  allow_failure: true
+  artifacts:
+    paths:
+      - build/
+
+
+job-1-stage1:
+  extends: .stage1-shared
+  script:
+    - mkdir build
+    - echo "INITIAL TEXT" > build/info1.txt
+    - !reference [.stage1-shared, script]
+    - cat build/info1.txt
+
+
+job-2-stage1:
+  extends: .stage1-shared
+  script:
+    - mkdir build
+    - echo "INITIAL TEXT 2" > build/info2.txt
+    - cat build/info2.txt

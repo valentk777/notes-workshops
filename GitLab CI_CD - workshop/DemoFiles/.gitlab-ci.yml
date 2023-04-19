@@ -1,0 +1,136 @@
+stages:
+  - stage1
+  - stage2
+
+
+default:
+  image: alpine
+  tags:
+    - Your-Runner
+  before_script:
+    - echo "this is before script"
+  after_script:
+    - echo "this is after script"
+
+
+trigger_remote:
+  trigger:
+    project: YOUR_REPO/learning.gitlabci.trigger
+    branch: main # optional
+    strategy: depend # optional
+
+
+trigger_local:
+  trigger:
+    include: 
+      - local: 'my_build.yaml'
+
+
+.stage1-shared:
+  stage: stage1
+  variables:
+    JOB_ENV_VARIABLE: "job local variable"
+  script:
+    - echo "Hello, $GITLAB_USER_LOGIN. You use $JOB_ENV_VARIABLE variable"
+  allow_failure: true
+  artifacts:
+    paths:
+      - build/
+
+
+job-1-stage1:
+  extends: .stage1-shared
+  script:
+    - mkdir build
+    - echo "INITIAL TEXT" > build/info1.txt
+    - cat build/info1.txt
+
+
+job-2-stage1:
+  extends: .stage1-shared
+  script:
+    - mkdir build
+    - echo "INITIAL TEXT 2" > build/info2.txt
+    - cat build/info2.txt
+
+
+.stage2-shared:
+  stage: stage2
+  variables:
+    JOB_ENV_VARIABLE: "job local variable"
+  script:
+    - echo "Hello, $GITLAB_USER_LOGIN. You use $JOB_ENV_VARIABLE variable"
+    - echo "print $TEST_ENV"
+    - cat build/info1.txt
+    - echo "Some text here." > build/info1.txt
+    - cat build/info1.txt
+
+    - cat build/info2.txt
+    - echo "Some text here 2." > build/info2.txt
+    - cat build/info2.txt
+  allow_failure: true
+  # this will say that you want to same your artifacts
+  artifacts:
+    name: updated_artifacts # name of the file you download
+    paths:
+      - build/
+
+
+job-1-stage2-ci:
+  extends: .stage2-shared
+  environment:
+    name: ci
+  artifacts:
+    exclude: 
+      - build/*2.txt
+
+
+job-1-stage2-uat:
+  extends: .stage2-shared
+  environment:
+    name: uat
+  artifacts:
+    expire_in: 10 seconds
+
+
+job-1-stage2-production:
+  extends: .stage2-shared
+  environment:
+    name: production
+
+
+
+# # Include
+
+# include:
+#   - local: 'my_build.yaml'
+#   - local: 'my_push.yaml'
+
+
+# stages:
+#   - stage1
+
+#   - stage2
+
+
+# default:
+#   image: alpine
+#   tags:
+#     - Your-Runner
+#   before_script:
+#     - echo "this is before script"
+#   after_script:
+#     - echo "this is after script"
+
+trigger_remote:
+  trigger:
+    # include: 
+    #   - local: 'my_build.yaml'
+    project: YOUR_REPO/learning.gitlabci.trigger
+    branch: main # optional
+    strategy: depend # optional
+
+# # trigger child:
+# #   trigger:
+# #     include: path....
+# #   strategy: depend # optional

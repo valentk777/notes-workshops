@@ -1,8 +1,8 @@
 # Workshop – Docker
-### Duration: 3 days
-### Level: Medium
-### Language: Lithuanian + English
-### Speaker: Valentinas Kaminskas
+* Duration: 3 days
+* Level: Medium
+* Language: Lithuanian + English
+* Speaker: [Valentinas Kaminskas](https://github.com/valentk777)
 
 
 # Day 1
@@ -18,7 +18,7 @@
 * docker system prune --all
 
 | Keyword    |      Description                                                                                 | 
-|------------|:------------------------------------------------------------------------------------------------:|
+|------------|:-------------------------------------------------------------------------------------------------|
 | FROM       |Sets the base image for subsequent                                                                |
 | MAINTAINER |Sets the author field of the generated images                                                     |
 | RUN        |Execute commands in a new layer on top of the current image and commit the results                |
@@ -51,26 +51,28 @@
 
 ### Entrypoint vs Cmd
 
-```
-# shell form
-# When instruction is executed in shell form it calls /bin/sh -c
-<command>
-# under the hood and normal shell processing happens.
-# <instruction> <command>
-```
-```
-# exec form
-# When instruction is executed in exec form it calls executable
-directly,
-# and shell processing does not happen
-# <instruction> ["executable", "param1", "param2", ...]
-```
-```
+shell form
+
+When instruction is executed in shell form it calls `/bin/sh -c`
+
+`<command>`
+
+under the hood and normal shell processing happens.
+
+`<instruction> <command>`
+
+exec form
+
+When instruction is executed in exec form it calls executable
+directly and shell processing does not happen
+`<instruction> ["executable", "param1", "param2", ...]`
+
+```dockerfile
 FROM debian:sid-slim
 RUN echo "Hello world"
 CMD ["/bin/echo", "Hello world"]
 ```
-```
+```dockerfile
 FROM debian:sid-slim
 RUN echo "Hello world"
 ENTRYPOINT ["/bin/echo", "Hello world"]
@@ -79,13 +81,13 @@ CMD sets DEFAULT command and/or parameters, which can be overwritten from comman
 ENTRYPOINT configures a container that will run as an executable.
 
 We can use them both
-```
+```dockerfile
 FROM debian:sid-slim
 ENTRYPOINT ["/bin/echo", "Hello"]
 CMD ["world"]
 ```
 
-```
+```dockerfile
 FROM debian:sid-slim
 # environment variable. Set there or change on docker RUN
 ENV mood happy
@@ -145,7 +147,7 @@ CMD [""]
 If you want to run a python flask application you can use python:3.10 and python:3.10-slim-buster. The slim version will be size
 optimized so if you have everything you need in your requirements, use the slim version instead.
 
-```
+```dockerfile
 # FROM python:3.10-slim-buster
 FROM python:3.10
 
