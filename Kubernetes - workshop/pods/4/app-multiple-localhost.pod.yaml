@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    app: nginx
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx
+    ports:
+    - containerPort: 80
+    resources:
+      requests:
+        memory: 256Mi
+        cpu: "0.2" 
+      limits:
+        memory: 512Mi
+        cpu: "0.2"
+  - name: redis-container
+    image: redis
+    imagePullPolicy: IfNotPresent
+    ports:
+    - containerPort: 6379
+    resources:
+      requests:
+        memory: 256Mi
+        cpu: "0.2" 
+      limits:
+        memory: 512Mi
+        cpu: "0.2"
+  - name: curl-container
+    image: curlimages/curl
+    command: ["/bin/sh"]
+    args: ["-c", "echo Working; sleep 300"] 
+    resources:
+      requests:
+        memory: 256Mi
+        cpu: "0.2" 
+      limits:
+        memory: 512Mi
+        cpu: "0.2"

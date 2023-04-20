@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: command-demo-multiple
+  labels:
+    purpose: demonstrate-multiple-command
+spec:
+  containers:
+  - name: multiple-command-demo-container
+    image: debian
+    command: ["/bin/sh"]
+    env:
+    - name: MY_VARIABLE
+      value: "It's my variable value"
+    # args:
+    #   - -c
+    #   - >-
+    #       printenv "MY_VARIABLE" &&
+    #       echo "I made this"
+
+    args: ["-c", "echo 'I made this'; whoami; exit"]
+
+    resources:
+      requests:
+        memory: 256Mi
+        cpu: "0.2" 
+      limits:
+        memory: 512Mi
+        cpu: "0.5"

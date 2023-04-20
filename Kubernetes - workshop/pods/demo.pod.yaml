@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+  # labels only 64 symbols
+    app: my-nginx
+    purpose: for-demo
+spec:
+  containers:
+  - name: nginx-container
+    image: nginx:latest
+    # In case the specification is not stated on the manifest file, Kubernetes will set the policy depending on the image’s tag. 
+    # If the image is tagged latest, then Kubernetes will assume the imagePullPolicy to be Always. 
+    # An image with no tag is assumed to be latest, and so its policy is set to Always. 
+    # Otherwise, the orchestrator will default the imagePullPolicy to IfNotPresent. 
+    # Possible values: [IfNotPresent, Always, Never]
+    imagePullPolicy: IfNotPresent
+    ports:
+    - containerPort: 80
+    resources: # for a container to request these resources from a node
+      requests: # minimum resources needed
+        memory: 256Mi
+        cpu: "0.2" # 20 % of node resources
+      limits: # maximum resources needed (cannot hit this one)
+        memory: 512Mi
+        cpu: "0.5"
+
+
+# section 3
+# status - created by kubernet

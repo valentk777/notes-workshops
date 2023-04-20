@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: probes-demo
+  labels:
+    purpose: nginx-probe-demo
+spec:
+  containers:
+    - name: nginx
+      image: nginx:alpine
+      # Probes - is a diagnostic performed periodically bu the kubelet on a container
+      # Liveness probe and readiness probe
+
+      # In container spec you need to define port which container is going to use.
+      # This can be defined by containerPort directive in the container spec of pod manifest.
+      # “containerPort” defines the port on which app can be reached out inside the container.
+      # Probe for http
+      livenessProbe:
+        httpGet: # type
+          # Path to probe
+          path: /index.html
+          # Port to probe
+          port: 80
+
+        # length of time to wait for a pod to initialize
+        # after pod startup, before applying health checking
+        initialDelaySeconds: 15 # start only after this time in order to give time for container to start
+        
+        # Amount of time to wait before timing out
+        timeoutSeconds: 2 # timeout
+        
+        # How often (in seconds) to perform the probe.
+        periodSeconds: 5 # check every x seconds
+        
+        # Kubernetes will try failureThreshold times before giving up and restarting the Pod
+        failureThreshold: 1 # number of time we allow to failure before failing a pod
+      ports:
+        - containerPort: 80
+      resources:
+        requests:
+          memory: 256Mi
+          cpu: "0.2"
+        limits:
+          memory: 512Mi
+          cpu: "0.5"

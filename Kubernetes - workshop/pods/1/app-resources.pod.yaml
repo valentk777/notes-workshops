@@ -1,0 +1,24 @@
+apiVersion: v1 # Kubernetes API version (change by kind. check in documentation)
+kind: Pod # Type of Kubernetes resource
+metadata: # metadata about the Pod
+  name: resource-demo
+  # could be anything. This is a place for your custom tags
+  labels:
+    purpose: nginx-single-container-demo
+spec: # the spec/blueprint for the Pod
+  containers: # information about the containers that will run in the Pod
+    - name: nginx
+      # image to start a container
+      image: nginx:alpine
+      # In container spec you need to define port which container is going to use.
+      # This can be defined by containerPort directive in the container spec of pod manifest.
+      # “containerPort” defines the port on which app can be reached out inside the container.
+      ports:
+        - containerPort: 80
+      resources: # for a container to request these resources from a node
+        requests: # minimum resources needed
+          memory: 256Mi
+          cpu: "0.2" # 20 % of node resources
+        limits: # maximum resources needed (cannot hit this one)
+          memory: 512Mi
+          cpu: "0.5"

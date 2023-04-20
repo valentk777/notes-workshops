@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: big-demo
+  labels:
+    purpose: demonstrate-multiple-settings
+spec: # the spec/blueprint for the Pod
+  containers: # information about the containers that will run in the Pod
+  - name: big-demo
+    image: nginx:alpine
+    # In case the specification is not stated on the manifest file, Kubernetes will set the policy depending on the image’s tag. 
+    # If the image is tagged latest, then Kubernetes will assume the imagePullPolicy to be Always. 
+    # An image with no tag is assumed to be latest, and so its policy is set to Always. 
+    # Otherwise, the orchestrator will default the imagePullPolicy to IfNotPresent. 
+    # [IfNotPresent, Always, Never]
+    imagePullPolicy: IfNotPresent 
+
+    # command: ["printenv"]
+    # args: ["HOSTNAME", "KUBERNETES_PORT"]
+
+    ports:
+    - containerPort: 80
+
+    # restartPolicy: OnFailure
+
+    resources: # for a container to request these resources from a node
+      requests: # minimum resources needed
+        memory: 256Mi
+        cpu: "0.2" # 20 % of node resources
+      limits: # maximum resources needed (cannot hit this one)
+        memory: 512Mi
+        cpu: "0.5"
+
+  - name: multiple-command-demo-container
+    image: debian
+    env:
+      - name: SERVICE_PORT
+        value: "80"
+      - name: SERVICE_IP
+        value: "172.17.0.1"
+      - name: UNCHANGED_REFERENCE
+        value: "test_variables:$(SERVICE_IP):$(SERVICE_PORT)"
+    command: ["printenv"]
+    args: ["UNCHANGED_REFERENCE"]
+    resources: # for a container to request these resources from a node
+      requests: # minimum resources needed
+        memory: 256Mi
+        cpu: "0.2" # 20 % of node resources
+      limits: # maximum resources needed (cannot hit this one)
+        memory: 512Mi
+        cpu: "0.5"

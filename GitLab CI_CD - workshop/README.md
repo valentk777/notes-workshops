@@ -1,7 +1,7 @@
 # Workshop – GitLab CI/CD 
-* Duration: 3 days
+* Duration: 5 days
 * Level: Medium
-* Language: Lithuanian + English
+* Language: English
 * Speaker: [Valentinas Kaminskas](https://github.com/valentk777)
 
 # Day 1

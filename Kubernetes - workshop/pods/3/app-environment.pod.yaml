@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: env-demo
+  labels:
+    purpose: demonstrate-environment-variables
+spec:
+  containers:
+  - name: env-demo-container
+    image: debian
+    # are to pass env variables for a pod. 
+    # if you need env variable in you container, then this is an area to pass them all
+    env:
+      - name: SERVICE_PORT
+        value: "80"
+      - name: SERVICE_IP
+        value: "172.17.0.1"
+      - name: UNCHANGED_REFERENCE
+        value: "test_variables:$(SERVICE_IP):$(SERVICE_PORT)"
+    command: ["printenv"]
+    args: ["$UNCHANGED_REFERENCE"]
+    resources: # for a container to request these resources from a node
+      requests: # minimum resources needed
+        memory: 256Mi
+        cpu: "0.2" # 20 % of node resources
+      limits: # maximum resources needed (cannot hit this one)
+        memory: 512Mi
+        cpu: "0.5"
