@@ -12,6 +12,47 @@ GoF Design Patterns are divided into three categories:
 2. Structural: The design patterns in this category deals with the class structure such as Inheritance and Composition
 3. Behavioral: This type of design patterns provide solution for the better interaction between objects, how to provide lose coupling, and flexibility to extend easily in future.
 
+There are 5 design patterns in the creational design patterns category.
+| Pattern Name     | Description |
+|------------------|:-------------------------------------------------------------------------------------------------|
+| [Singleton](#singleton-pattern)        | The singleton pattern restricts the initialization of a class to ensure that only one instance of the class can be created. |
+| [Factory](#factory-pattern)          | The factory pattern takes out the responsibility of instantiating a object from the class to a Factory class. |
+| [Abstract Factory](#abstract-factory-pattern) | Provide an interface for creating families of related or dependent objects without specifying their concrete classes. Allows us to create a Factory for factory classes. |
+| [Builder](#builder-pattern)          | Creating an object step by step and a method to finally get the object instance. |
+| [Prototype](#prototype-pattern)        | Creating a new object instance from another similar instance and then modify according to our requirements. |
+
+
+## Structural Design Patterns
+There are 7 structural design patterns defined in the Gangs of Four design patterns book.
+| Pattern Name | Description |
+|--------------|:-------------------------------------------------------------------------------------------------|
+| [Adapter](#adapter-pattern)      | Provides an interface between two unrelated entities so that they can work together. |
+| [Composite](#composite-pattern)    | Used when we have to implement a part-whole hierarchy. For example, a diagram made of other pieces such as circle, square, triangle, etc. |
+| [Proxy](#proxy-pattern)        | Provide a surrogate or placeholder for another object to control access to it. |
+| [Flyweight](#flyweight-pattern)    | Caching and reusing object instances, used with immutable objects. For example, string pool. |
+| [Facade](#facade-pattern)       | Creating a wrapper interfaces on top of existing interfaces to help client applications. |
+| [Bridge](#bridge-pattern)       | The bridge design pattern is used to decouple the interfaces from implementation and hiding the implementation details from the client program. |
+| [Decorator](#decorator-pattern)    | The decorator design pattern is used to modify the functionality of an object at runtime. |
+
+## Behavioral Design Patterns
+There are 11 behavioral design patterns defined in the GoF design patterns.
+| Pattern Name            | Description |
+|-------------------------|:-------------------------------------------------------------------------------------------------|
+| [Template Method](#template-method-pattern)         | used to create a template method stub and defer some of the steps of implementation to the subclasses. |
+| [Mediator](#mediator-pattern)                | used to provide a centralized communication medium between different objects in a system. |
+| [Chain of Responsibility](#chain-of-responsibility-pattern) | used to achieve loose coupling in software design where a request from the client is passed to a chain of objects to process them. |
+| [Observer](#observer-pattern)                | useful when you are interested in the state of an object and want to get notified whenever there is any change. |
+| [Strategy](#strategy-pattern)                | Strategy pattern is used when we have multiple algorithm for a specific task and client decides the actual implementation to be used at runtime. |
+| [Command](#command-pattern)                 | Command Pattern is used to implement lose coupling in a request-response model. |
+| [State](#state-pattern)                   | State design pattern is used when an Object change it’s behavior based on it’s internal state. |
+| [Visitor](#visitor-pattern)                 | Visitor pattern is used when we have to perform an operation on a group of similar kind of Objects. |
+| [Interpreter](#interpreter-pattern)             | defines a grammatical representation for a language and provides an interpreter to deal with this grammar. |
+| [Iterator](#iterator-pattern)                | used to provide a standard way to traverse through a group of Objects. |
+| [Memento](#memento-pattern)                 | The memento design pattern is used when we want to save the state of an object so that we can restore later on. |
+
+
+
+
 # Day 1
 
 ## Preparation
@@ -28,9 +69,9 @@ There are 5 design patterns in the creational design patterns category.
 | [Factory](#factory-pattern)          | The factory pattern takes out the responsibility of instantiating a object from the class to a Factory class. |
 | [Abstract Factory](#abstract-factory-pattern) | Provide an interface for creating families of related or dependent objects without specifying their concrete classes. Allows us to create a Factory for factory classes. |
 | [Builder](#builder-pattern)          | Creating an object step by step and a method to finally get the object instance. |
-| [Prototype](#prototype-pattern)        | Creating a new object instance from another similar instance and then modify according to our requirements. |
+| [Prototype](#prototype-pattern)        | Create a new object instance from another similar instance and then modify according to our requirements. |
 
-## Review them all in details
+## Review them all in detail
 
 ### Singleton Pattern
    - Confidence: 4/5 [Remove]
